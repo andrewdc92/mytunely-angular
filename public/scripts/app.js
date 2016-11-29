@@ -3,35 +3,32 @@
  * This is your main angular file. Edit as you see fit.
  *
  */
+ angular
+   .module('tunely', ['ngRoute'])
+   .config(config);
 
-angular
-  .module('tunely', [])
-  .controller('AlbumsIndexController', AlbumsIndexController);
-  // ^ the first argument is a string naming the controller,
-  // the second argument is a function that defines the capacities
-  // of the controller.
+ config.$inject = ['$routeProvider', '$locationProvider'];
 
-function AlbumsIndexController () {
-  var vm = this;
-  vm.newAlbum = {};
+ function config ($routeProvider, $locationProvider) {
+   $routeProvider
+     .when('/', {
+       templateUrl: '/templates/albums',
+       controllerAs: 'albumsIndexCtrl',
+       controller: 'AlbumsIndexController'
+     })
+     .when('/albums', {
+       templateUrl: '/templates/albums',
+       controllerAs: 'albumsIndexCtrl',
+       controller: 'AlbumsIndexController'
+     })
+     .when('/albums/:id', {
+       templateUrl: '/templates/albums-show',
+       controllerAs: 'albumsShowCtrl',
+       controller: 'AlbumsShowController'
+     })
 
-  vm.newAlbum = {
-      name: 'Viva Hate',
-      artistName: 'Morrissey'
-  };
-
-  vm.albums = [
-    {
-      name: 'Coming Home',
-      artistName: 'Leon Bridges'
-    },
-    {
-      name: 'Are We There',
-      artistName: 'Sharon Van Etten'
-    },
-    {
-      name: 'The Queen is Dead',
-      artistName: 'The Smiths'
-    }
-  ];
-}
+     $locationProvider.html5Mode({
+       enabled: true,
+       requireBase: false
+   });
+ }

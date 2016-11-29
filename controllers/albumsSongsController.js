@@ -1,4 +1,3 @@
-// albumsSongsController
 var db = require('../models');
 
 // app.get('/api/albums/:albumId/songs', controllers.albumsSongs.index);
